@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js">
+    </script>
+    <title>All Appointments</title>
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Hospital Appointments</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="appointment.html">Make Appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="doctors.html">Doctors</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="appointments.html">All Appointments</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">All Appointments</h2>
+
+        <div id="accordion">
+            <!-- Dynamically load appointment data from localStorage -->
+            <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+                type="module"></script>
+
+            <dotlottie-player src="https://lottie.host/c18e31f1-21bf-41db-8e03-952b48de2a96/t366gYLy95.json"
+                background="transparent" speed="1" style="width: 300px; height: 300px;display: block; margin: auto;"
+                loop autoplay></dotlottie-player>
+            <script>
+                var appointments = JSON.parse(localStorage.getItem('appointments')) || [];
+
+                appointments.forEach(function (appointment, index) {
+                    var cardId = 'collapse' + (index + 1);
+
+                    var cardHtml = `
+                    <div class="card">
+                        <div class="card-header" id="heading${index}">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#${cardId}" aria-expanded="true" aria-controls="${cardId}">
+                                    Appointment ${index + 1}
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="${cardId}" class="collapse" aria-labelledby="heading${index}" data-parent="#accordion">
+                            <div class="card-body">
+                                <strong>Patient Name:</strong> ${appointment.name}<br>
+                                <strong>Contact:</strong> ${appointment.contact}<br>
+                                <strong>Doctor:</strong> ${appointment.doctor}<br>
+                                <strong>Date:</strong> ${appointment.date}<br>
+                                <strong>Time:</strong> ${appointment.time}
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                    document.write(cardHtml);
+                });
+            </script>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html> 

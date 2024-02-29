@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz@9..40&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+    <title>Make Appointment</title>
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+        }
+    </style> 
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Hospital Appointments</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="appointment.html">Make Appointment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="doctors.html">Doctors</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="appointments.html">All Appointments</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <h2 class="text-center">Make an Appointment</h2>
+        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+            type="module"></script>
+
+        <dotlottie-player src="https://lottie.host/03ccd5ac-9d01-4512-8b9b-e1288e9aa001/07f38Qu7O8.json"
+            background="transparent" speed="1.5" style="width: 300px; height: 300px; display: block; margin: auto;" loop
+            autoplay></dotlottie-player>
+
+        <form id="appointmentForm">
+            <div class="form-group">
+                <label for="name">Your Name:</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="contact">Contact Number:</label>
+                <input type="tel" class="form-control" id="contact" pattern="[0-9]{10}"
+                    placeholder="Enter 10-digit number" required>
+            </div>
+            <div class="form-group">
+                <label for="doctor">Select Doctor:</label>
+                <select class="form-control" id="doctor" required>
+                    <option value="dr-rajkumar">Dr. Raj</option>
+                    <option value="dr-madhuri">Dr. Manav</option>
+                    <option value="dr-vijay">Dr. Vijay</option>
+                </select>
+                <div class="form-group">
+                    <label for="date">Select Date:</label>
+                    <input type="date" class="form-control" id="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">Select Time:</label>
+                    <input type="time" class="form-control" id="time" required>
+                </div>
+                <button type="submit" class="btn btn-success btn-block">Submit</button>
+        </form>
+
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#appointmentForm").submit(function (event) {
+                event.preventDefault();
+
+                // Fetch values from form fields
+                var name = $("#name").val();
+                var contact = $("#contact").val();
+                var doctor = $("#doctor option:selected").text(); // Fetch the selected doctor's name
+                var date = $("#date").val();
+                var time = $("#time").val();
+
+                // Display the appointment details in toastr
+                toastr.success(`Appointment Confirmed:
+                    <br>Name: ${name}
+                    <br>Contact: ${contact}
+                    <br>Doctor: ${doctor}
+                    <br>Date: ${date}
+                    <br>Time: ${time}`, 'Appointment Successful');
+
+                // Clear the form fields
+                $("#appointmentForm")[0].reset();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
